@@ -1,0 +1,23 @@
+{
+  "name": "scripts",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.1481.0",
+    "csv-parser": "^3.2.0",
+    "csvtojson": "^2.0.10",
+    "dotenv": "^16.3.1",
+    "fs": "^0.0.1-security",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.4",
+    "mongodb": "^6.1.0",
+    "nodemon": "^3.0.1"
+  },
+  "description": ""
+}
