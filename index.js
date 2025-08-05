@@ -24,8 +24,9 @@ const init = async () => {
     // await startJob();
 
     const startJob1 = require('./scripts/onrampReport');
-    await startJob1();
-    // await startJob2();
+    const startJob2 = require('./scripts/offrampReport');
+    // await startJob1();
+    await startJob2();
 
     process.exit(0);
 }
