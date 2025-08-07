@@ -2,27 +2,11 @@ const { Order } = global;
 
 const filter = {
     type: 'buy',
-    orderId: {
-        $in: [
-            "OR-250801030827036166",
-            "OR-250731225642983688",
-            "OR-250731213048368196",
-            "OR-250731173709845626",
-            "OR-250731165849138294",
-            "OR-250731162951348780",
-            "OR-250731151903116256",
-            "OR-250731115426651844",
-            "OR-250731112132798724",
-            "OR-250731105648341592",
-            "OR-250730165009094185",
-            "OR-250728115942642519"
-        ]
+    'timestamps.assetSettledAt': {
+        $gte: new Date("2025-08-06T00:00:00.000Z"),
+        $lt: new Date("2025-08-08T00:00:00.000Z")
     },
-    // createdAt: {
-    //     $gte: new Date("2025-08-01T00:00:00.000Z"),
-    //     $lte: new Date(),
-    // },
-    // status: 'asset_settled'
+    status: 'asset_settled'
 }
 
 const startJob = async () => {

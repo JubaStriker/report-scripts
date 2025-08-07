@@ -20,13 +20,10 @@ const init = async () => {
     global.Webhook = Webhook;
     global.PaymentMethod = PaymentMethod;
 
-    // const startJob = process.env.FILE_TYPE ? require(`./scripts/${process.env.FILE_TYPE}`) : require('./scripts/sample');
-    // await startJob();
-
     const startJob1 = require('./scripts/onrampReport');
     const startJob2 = require('./scripts/offrampReport');
-    //await startJob1();
-    await startJob2();
+    await startJob1();
+    //await startJob2();
 
     process.exit(0);
 }
