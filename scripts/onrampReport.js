@@ -3,8 +3,8 @@ const { Order } = global;
 const filter = {
     type: 'buy',
     'timestamps.assetSettledAt': {
-        $gte: new Date("2025-08-06T00:00:00.000Z"),
-        $lt: new Date("2025-08-08T00:00:00.000Z")
+        $gte: new Date("2025-08-07T00:00:00.000Z"),
+        $lt: new Date("2025-08-09T00:00:00.000Z")
     },
     status: 'asset_settled'
 }
