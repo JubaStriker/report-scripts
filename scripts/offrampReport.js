@@ -3,10 +3,11 @@ const { Order } = global;
 const filter = {
     type: 'sell',
     'timestamps.fundSettledAt': {
-        $gte: new Date("2025-08-07T00:00:00.000Z"),
-        $lt: new Date("2025-08-09T00:00:00.000Z")
+        $gte: new Date("2025-08-12T00:00:00.000Z"),
+        $lt: new Date("2025-08-15T00:00:00.000Z")
     },
-    status: 'fund_settled'
+    status: 'fund_settled',
+    'customer.formattedName': 'binance_prod'
 };
 
 const startJob = async () => {
@@ -181,7 +182,7 @@ const startJob = async () => {
     }
 
     // Function to download CSV file (for browser environment)
-    function downloadCSV(csvContent, filename = 'orders_export.csv') {
+    function downloadCSV(csvContent, filename = 'offramp_orders_export.csv') {
         const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
         const link = document.createElement('a');
 

@@ -2,11 +2,12 @@ const { Order } = global;
 
 const filter = {
     type: 'buy',
-    'timestamps.assetSettledAt': {
-        $gte: new Date("2025-08-07T00:00:00.000Z"),
-        $lt: new Date("2025-08-09T00:00:00.000Z")
+    'timestamps.fundSettledAt': {
+        $gte: new Date("2025-08-12T00:00:00.000Z"),
+        $lt: new Date("2025-08-15T00:00:00.000Z")
     },
-    status: 'asset_settled'
+    status: 'fund_settled',
+    'customer.formattedName': 'binance_prod'
 }
 
 const startJob = async () => {
@@ -108,7 +109,7 @@ const startJob = async () => {
     }
 
     // Function to save CSV file (for Node.js environment)
-    function saveCSVToFile(csvContent, filename = 'orders_export.csv') {
+    function saveCSVToFile(csvContent, filename = 'ornamp_orders_export.csv') {
         const fs = require('fs');
         fs.writeFileSync(filename, csvContent, 'utf8');
         console.log(`CSV file saved as ${filename}`);
