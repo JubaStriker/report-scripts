@@ -3,8 +3,8 @@ const { Order } = global;
 const filter = {
     type: 'buy',
     'timestamps.fundSettledAt': {
-        $gte: new Date("2025-08-12T00:00:00.000Z"),
-        $lt: new Date("2025-08-15T00:00:00.000Z")
+        $gte: new Date("2025-08-13T00:00:00.000Z"),
+        $lt: new Date("2025-08-19T00:00:00.000Z")
     },
     status: 'fund_settled',
     'customer.formattedName': 'binance_prod'
