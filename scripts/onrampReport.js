@@ -1,13 +1,13 @@
 const { Order } = global;
 
 const filter = {
-    type: 'buy',
-    'timestamps.fundSettledAt': {
-        $gte: new Date("2025-08-19T00:00:00.000Z"),
-        $lt: new Date("2025-08-22T00:00:00.000Z")
+    type: 'gaming',
+    'timestamps.completedAt': {
+        $gte: new Date("2025-08-20T00:00:00.000Z"),
+        $lt: new Date("2025-08-25T00:00:00.000Z")
     },
-    status: 'fund_settled',
-    'customer.formattedName': 'binance_prod'
+    status: 'completed',
+    'customer.formattedName': 'finera'
 }
 
 const startJob = async () => {
@@ -17,7 +17,7 @@ const startJob = async () => {
 
     const headers = [
         "_id", "orderId", "type", "fiatTicker", "cryptoTicker", "cryptoNetwork",
-        "fiatAmount", "cryptoAmount", "cryptoUnitPrice", "totalFee",
+        "fiatAmount", "cryptoAmount", "cryptoUnitPrice", "depositCurrency", , "depositAmount", "withdrawCurrency", "withdrawAmount", "totalFee",
         "fees.networkFee", "fees.processingFee", "fees.fixedFee.totalFixedFees",
         "fees.fixedFee.totalFixedTfFees", "fees.fixedFee.totalFixedCxFees",
         "fees.fixedFee.fixedFeesCurrency", "fees.fixedFee.fixedFeeDetails.baseFeeFixedRate",
@@ -37,6 +37,7 @@ const startJob = async () => {
         "crypto.depositId", "crypto.txnHash", "crypto.conversionFee", "crypto.convertedAmount",
         "timestamps.initiatedAt", "timestamps.assetSettledAt", "timestamps.fundProcessingAt",
         "timestamps.fundSettledAt", "sellCheckoutDetails.orderId", "sellCheckoutDetails.paymentAddress",
+        "settlementStatus",
         "sellCheckoutDetails.redirectUrl", "deviceDetails.userAgent", "deviceDetails.acceptLang",
         "deviceDetails.deviceSignature", "deviceDetails.ipInfo.ip", "deviceDetails.ipInfo.lat",
         "deviceDetails.ipInfo.lon", "deviceDetails.ipInfo.countryCode3", "deviceDetails.coords.lat",
@@ -54,9 +55,14 @@ const startJob = async () => {
     ];
 
     function getNestedValue(obj, path) {
-        return path.split('.').reduce((current, key) => {
+        const value = path.split('.').reduce((current, key) => {
             return current && current[key] !== undefined ? current[key] : '';
         }, obj);
+        // If value is a Date, convert to ISO string (UTC)
+        if (value instanceof Date) {
+            return value.toISOString();
+        }
+        return value;
     }
 
     // Function to escape CSV values (handle commas, quotes, newlines)
