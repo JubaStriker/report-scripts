@@ -3,8 +3,8 @@ const { Order } = global;
 const filter = {
     type: 'sell',
     'timestamps.fundSettledAt': {
-        $gte: new Date("2025-08-21T00:00:00.000Z"),
-        $lt: new Date("2025-08-26T00:00:00.000Z")
+        $gte: new Date("2025-08-24T00:00:00.000Z"),
+        $lt: new Date("2025-08-27T00:00:00.000Z")
     },
     status: 'fund_settled',
     'customer.formattedName': 'binance_prod'
@@ -143,9 +143,14 @@ const startJob = async () => {
     ];
 
     function getNestedValue(obj, path) {
-        return path.split('.').reduce((current, key) => {
+        const value = path.split('.').reduce((current, key) => {
             return current && current[key] !== undefined ? current[key] : '';
         }, obj);
+        // If value is a Date, convert to ISO string (UTC)
+        if (value instanceof Date) {
+            return value.toISOString();
+        }
+        return value;
     }
 
     // Function to escape CSV values (handle commas, quotes, newlines)

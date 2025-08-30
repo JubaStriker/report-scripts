@@ -1,13 +1,13 @@
 const { Order } = global;
 
 const filter = {
-    type: 'gaming',
-    'timestamps.completedAt': {
-        $gte: new Date("2025-08-20T00:00:00.000Z"),
-        $lt: new Date("2025-08-25T00:00:00.000Z")
+    type: 'buy',
+    'timestamps.fundSettledAt': {
+        $gte: new Date("2025-08-24T00:00:00.000Z"),
+        $lt: new Date("2025-08-27T00:00:00.000Z")
     },
-    status: 'completed',
-    'customer.formattedName': 'finera'
+    status: 'fund_settled',
+    'customer.formattedName': 'binance_prod'
 }
 
 const startJob = async () => {
