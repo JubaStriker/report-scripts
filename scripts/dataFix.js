@@ -8,26 +8,32 @@ const startJob = async () => {
                 $gte: new Date("2025-08-04T10:25:28.516Z"),
                 $lte: new Date()
             },
-            "customer.formattedName": { $nin: ['binance_prod', 'binancep2p'] }
+            "customer.formattedName": { $nin: ['binancep2p'] }
         },
         [
             {
                 $set: {
-                    "metaData.usdAmount": {
+                    "fiat.markupFee": {
                         $cond: [
                             {
                                 $and: [
                                     { $ifNull: ["$fiat.conversionRate", false] },
-                                    { $gt: [{ $toDouble: "$fiat.conversionRate" }, 0] }
+                                    { $ifNull: ["$fiat.conversionRateWithoutMarkup", false] },
+                                    { $gt: [{ $toDouble: "$fiat.conversionRateWithoutMarkup" }, 0] }
                                 ]
                             },
                             {
-                                $divide: [
-                                    { $toDouble: "$fiatAmount" },
-                                    { $toDouble: "$fiat.conversionRate" }
+                                $subtract: [
+                                    {
+                                        $divide: [
+                                            { $toDouble: "$fiat.conversionRate" },
+                                            { $toDouble: "$fiat.conversionRateWithoutMarkup" }
+                                        ]
+                                    },
+                                    1
                                 ]
                             },
-                            "$metaData.usdAmount"
+                            null
                         ]
                     }
                 }
