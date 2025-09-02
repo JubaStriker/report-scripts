@@ -10,9 +10,11 @@ const init = async () => {
 
     const startJob1 = require('./scripts/onrampReport');
     const startJob2 = require('./scripts/offrampReport');
+    const startJob3 = require('./scripts/dataFix');
 
-    await startJob1();
-    await startJob2();
+    // await startJob1();
+    // await startJob2();
+    await startJob3();
 
     process.exit(0);
 }

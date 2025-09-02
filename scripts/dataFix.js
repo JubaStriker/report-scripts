@@ -4,11 +4,12 @@ const startJob = async () => {
     const result = await Order.updateMany(
         {
             type: "buy",
+            "customer.formattedName": "binancep2p",
             createdAt: {
-                $gte: new Date("2025-08-04T10:25:28.516Z"),
-                $lte: new Date()
+                $lte: new Date('2025-09-01T12:03:50.834+00:00'),
+                $gte: new Date('2025-08-26T02:28:45.411+00:00')
             },
-            "customer.formattedName": { $nin: ['binancep2p'] }
+            'fiat.conversionRateWithoutMarkup': { $exists: 1 }
         },
         [
             {
